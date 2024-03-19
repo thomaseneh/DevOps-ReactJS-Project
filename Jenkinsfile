@@ -18,7 +18,7 @@ pipeline{
         }
         stage('fetch'){
           steps{
-            git branch: 'main', url: 'https://github.com/thomaseneh/React-Essential.git' 
+            git branch: 'main', url: 'https://github.com/thomaseneh/DevOps-ReactJS-Project.git' 
             }
         }
       stage('unit test'){
