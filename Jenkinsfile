@@ -64,16 +64,17 @@ pipeline{
               }
             }
         }
-      stage('upload'){
-        steps{
-          script{
-            docker.withRegistry('', registryCredential){
-              image.push("$BUILD_ID")
-              image.push("latest")
+      stage('upload') {
+          steps {
+              script {
+                  docker.withRegistry('', registryCredential) {
+                      image.push("$BUILD_ID")
+                      image.push("latest")
+                      }
+                  }
               }
-            }
           }
-        }
+
       stage('remove unused images'){
         steps{
             script{
