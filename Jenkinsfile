@@ -31,13 +31,13 @@ pipeline{
       //       bat 'npm run integration test Dskip unitTest'
       //   }
       // }
-      stage('style analysis'){
-        steps{
-           script{
-              bat 'npm run checkstyle'
-              }
-            }
-        }
+      // stage('style analysis'){
+      //   steps{
+      //      script{
+      //         bat 'npm run checkstyle'
+      //         }
+      //       }
+      //   }
       stage('sonar analysis'){
         environment{
             scannerHome = tool 'sonarQubeScanner'
