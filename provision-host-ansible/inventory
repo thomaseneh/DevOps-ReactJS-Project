@@ -1,0 +1,23 @@
+all:
+  hosts:
+    CICD-jenkins:
+      ansible_host: 172.31.29.151
+    orchestrator-k8s:
+      ansible_host: 172.31.27.25
+    analyzer-sonar:
+      ansible_host: 172.31.16.37
+
+  children:
+    servers:
+      hosts:
+        CICD-jenkins:
+        orchestrator-k8s:
+        analyzer-sonar:
+
+    us-east-1:
+      children:
+        servers:
+
+      vars:
+        ansible_user: ubuntu
+        ansible_ssh_private_key_file: servers-key.pem

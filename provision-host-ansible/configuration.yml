@@ -1,0 +1,90 @@
+- name: Install k8s softwares
+  hosts: orchestrator-k8s
+  become: true
+
+  tasks:
+    - name: Update package cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install kubectl
+      ansible.builtin.get_url:
+        url: "https://dl.k8s.io/release/v1.29.0/bin/linux/amd64/kubectl" 
+        dest: /usr/local/bin/kubectl
+        mode: '0755'
+
+    - name: Install kops
+      ansible.builtin.get_url:
+        url: "https://github.com/kubernetes/kops/releases/download/1.25/kops-linux-amd64" 
+        dest: /usr/local/bin/kops
+        mode: '0755'
+
+    - name: Ensure kops has correct permissions
+      ansible.builtin.file:
+        path: /usr/local/bin/kops
+        mode: '0755'
+
+    - name: Ensure kops is in correct location
+      ansible.builtin.file:
+        src: /usr/local/bin/kops
+        dest: /usr/local/bin/kops
+        state: link
+        force: yes
+
+    - name: Download Helm script
+      ansible.builtin.get_url:
+        url: "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3"
+        dest: /usr/local/bin/get_helm.sh
+        mode: '0755'
+
+    - name: Install Helm
+      ansible.builtin.command: /usr/local/bin/get_helm.sh
+
+- name: Install app on Jenkins
+  hosts: CICD-jenkins
+  become: true
+
+  tasks:
+    - name: Download Jenkins keyring
+      ansible.builtin.get_url:
+        url: https://pkg.jenkins.io/debian/jenkins.io-2023.key
+        dest: /usr/share/keyrings/jenkins-keyring.asc
+
+    - name: Add Jenkins repository
+      ansible.builtin.copy:
+        content: |
+          deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/
+        dest: /etc/apt/sources.list.d/jenkins.list
+
+    - name: Update package cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install Jenkins
+      ansible.builtin.apt:
+        name: jenkins
+        state: present
+
+    - name: Install JRE
+      ansible.builtin.apt:
+        name: openjdk-17-jre
+        state: present
+
+- name: Install sonarQube app
+  hosts: analyzer-sonar
+  become: true
+
+  tasks:
+    - name: Update package cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install JDK 17
+      ansible.builtin.apt:
+        name: openjdk-17-jdk
+        state: present
+
+    - name: Install SonarQube
+      ansible.builtin.apt:
+        name: sonarqube
+        state: present
