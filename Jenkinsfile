@@ -1,8 +1,8 @@
 pipeline{
     agent any
-    // tools:
-    // git 'Git'
-    // node 'nodeJS'
+    tools:
+      git 'Git'
+      node 'nodeJS'
 
     environment{
       registry = "tomcoder/reactImages"
@@ -12,28 +12,28 @@ pipeline{
     stages{
       stage('install dependencies'){
         steps{
-            sh 'npm install'
-            sh 'npm run build'
+            bat 'npm install'
+            bat 'npm run build'
             }
         }
         stage('fetch'){
           steps{
-            git branch: 'main', url: 'https://github.com/thomaseneh/DevOps-ReactJS-Project.git' 
+            bat branch: 'main', url: 'https://github.com/thomaseneh/DevOps-ReactJS-Project.git' 
             }
         }
       stage('unit test'){
         steps{
-            sh 'npm run test'
+            bat 'npm run test'
         }
       }
       stage('integration test'){
         steps{
-            sh 'npm run integration test Dskip unitTest'
+            bat 'npm run integration test Dskip unitTest'
         }
       }
       stage('style analysis'){
         steps{
-            sh 'npm run checkstyle'
+            bat 'npm run checkstyle'
             }
         }
       stage('sonar analysis'){
@@ -42,7 +42,7 @@ pipeline{
         }
         steps{
             withSonarQubeEnv('sonarQubeScanner'){
-                sh '''package*.jason -Dsonar.projectKey=devops \
+                bat '''package*.jason -Dsonar.projectKey=devops \
                     -Dsonar.projectName=reactEssential'''
                 }
             }
@@ -57,7 +57,7 @@ pipeline{
       stage('build image'){
         steps{
             script{
-              image = "sh docker build ${registry}:$BUILD_ID"
+              image = "bat docker build ${registry}:$BUILD_ID"
               }
             }
         }
@@ -74,7 +74,7 @@ pipeline{
       stage('remove unused images'){
         steps{
             script{
-              sh "docker rmi ${registry}:$BUILD_ID"
+              bat "docker rmi ${registry}:$BUILD_ID"
             }
             }
         }
