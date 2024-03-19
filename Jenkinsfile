@@ -5,7 +5,7 @@ pipeline{
     //   node 'nodeJS'
 
     environment{
-      registry = "tomcoder/reactImages"
+      registry = "tomcoder/reactimages"
       registryCredential = "dockerhub"
     }
 
