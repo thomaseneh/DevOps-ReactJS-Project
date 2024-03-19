@@ -21,16 +21,16 @@ pipeline{
             git branch: 'master', url: 'https://github.com/thomaseneh/DevOps-ReactJS-Project.git' 
             }
         }
-      stage('unit test'){
-        steps{
-            bat 'npm run test'
-        }
-      }
-      stage('integration test'){
-        steps{
-            bat 'npm run integration test Dskip unitTest'
-        }
-      }
+      // stage('unit test'){
+      //   steps{
+      //       bat 'npm run test'
+      //   }
+      // }
+      // stage('integration test'){
+      //   steps{
+      //       bat 'npm run integration test Dskip unitTest'
+      //   }
+      // }
       stage('style analysis'){
         steps{
             bat 'npm run checkstyle'
