@@ -42,7 +42,7 @@ pipeline{
         }
         steps{
             withSonarQubeEnv('sonarQubeScanner'){
-                bat '''package*.jason -Dsonar.projectKey=devops \
+                bat '''package*.json -Dsonar.projectKey=devops \
                     -Dsonar.projectName=reactEssential'''
                 }
             }
