@@ -60,7 +60,8 @@ pipeline{
       stage('build image'){
         steps{
             script{
-              image = "bat docker build ${registry}:$BUILD_ID"
+                def image = "${registry}:${BUILD_ID}"
+                bat "docker build ${image}"
               }
             }
         }
@@ -68,8 +69,10 @@ pipeline{
           steps {
               script {
                   docker.withRegistry('', registryCredential) {
-                      image.push("$BUILD_ID")
-                      image.push("latest")
+                      docker.image(image).push()
+                      docker.image(image).push("latest")
+                      // image.push("$BUILD_ID")
+                      // image.push("latest")
                       }
                   }
               }
