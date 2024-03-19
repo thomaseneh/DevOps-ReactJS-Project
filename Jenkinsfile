@@ -18,7 +18,7 @@ pipeline{
         }
         stage('fetch'){
           steps{
-            bat branch: 'master', url: 'https://github.com/thomaseneh/DevOps-ReactJS-Project.git' 
+            git branch: 'master', url: 'https://github.com/thomaseneh/DevOps-ReactJS-Project.git' 
             }
         }
       stage('unit test'){
