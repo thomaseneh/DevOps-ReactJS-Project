@@ -38,17 +38,18 @@ pipeline{
       //         }
       //       }
       //   }
-      stage('sonar analysis'){
-        environment{
-            scannerHome = tool 'sonarQubeScanner'
-        }
-        steps{
-            withSonarQubeEnv('sonarQubeScanner'){
-                bat '''package*.json -Dsonar.projectKey=devops \
-                    -Dsonar.projectName=reactEssential'''
+      stage('sonar analysis') {
+        environment {
+          scannerHome = tool 'sonarQubeScanner'
+          }
+          steps {
+            script {
+              withSonarQubeEnv('sonarQubeScanner') {
+                bat "\"${scannerHome}/bin/sonar-scanner.bat\" -Dsonar.projectKey=devops -Dsonar.projectName=reactEssential"
                 }
+              }
             }
-        }
+          }
       // stage("Quality Gate") {
       //   steps {
       //       timeout(time: 10, unit: 'MINUTES') {
