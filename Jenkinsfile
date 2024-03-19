@@ -1,8 +1,8 @@
 pipeline{
     agent any
-    tools:
-      git 'Git'
-      node 'nodeJS'
+    // tools:
+    //   git 'Git'
+    //   node 'nodeJS'
 
     environment{
       registry = "tomcoder/reactImages"
@@ -18,7 +18,7 @@ pipeline{
         }
         stage('fetch'){
           steps{
-            bat branch: 'main', url: 'https://github.com/thomaseneh/DevOps-ReactJS-Project.git' 
+            bat branch: 'master', url: 'https://github.com/thomaseneh/DevOps-ReactJS-Project.git' 
             }
         }
       stage('unit test'){
