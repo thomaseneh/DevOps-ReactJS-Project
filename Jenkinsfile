@@ -6,7 +6,7 @@ pipeline{
 
     environment{
       registry = "tomcoder/reactImages"
-      registryCredential = "dockerhub-key"
+      registryCredential = "dockerhub"
     }
 
     stages{
