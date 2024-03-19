@@ -68,7 +68,7 @@ pipeline{
           steps {
               script {
                   docker.withRegistry('', registryCredential) {
-                      dockerimage.push("BUILD_NUMBER")
+                      dockerimage.push("$BUILD_NUMBER")
                       dockerimage.push("latest")
                       }
                   }
@@ -89,7 +89,8 @@ pipeline{
             post{
                 success{
                     echo 'All stages are successful, archeving the actifacts'
-                    archiveArtifacts artifacts: 'build/**'
+                    // archiveArtifacts artifacts: 'build/**'
+                      archiveArtifacts 'dist/**'
                 }
             }
         }
