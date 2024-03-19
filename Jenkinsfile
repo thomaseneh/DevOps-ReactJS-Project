@@ -89,7 +89,7 @@ pipeline{
             post{
                 success{
                     echo 'All stages are successful, archeving the actifacts'
-                    archiveArtifacts artifacts: '**/target/*.war'
+                    archiveArtifacts artifacts: 'build/**'
                 }
             }
         }
