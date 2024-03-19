@@ -38,18 +38,18 @@ pipeline{
       //         }
       //       }
       //   }
-      stage('sonar analysis') {
-        environment {
-          scannerHome = tool 'sonarQubeScanner'
-          }
-          steps {
-            script {
-              withSonarQubeEnv('sonarScanner') {
-                bat """\"${scannerHome}\\bin\\sonar-scanner\" -Dsonar.projectKey=devops -Dsonar.projectName=reactEssential"""
-                }
-              }
-            }
-          }
+      // stage('sonar analysis') {
+      //   environment {
+      //     scannerHome = tool 'sonarQubeScanner'
+      //     }
+      //     steps {
+      //       script {
+      //         withSonarQubeEnv('sonarScanner') {
+      //           bat """\"${scannerHome}\\bin\\sonar-scanner\" -Dsonar.projectKey=devops -Dsonar.projectName=reactEssential"""
+      //           }
+      //         }
+      //       }
+      //     }
       // stage("Quality Gate") {
       //   steps {
       //       timeout(time: 10, unit: 'MINUTES') {
@@ -60,7 +60,7 @@ pipeline{
       stage('build image'){
         steps{
             script{
-                dockerImage = docker.build registry + ":$BUILD_ID"
+                dockerimage = docker.build registry + ":$BUILD_ID"
               }
             }
         }
@@ -68,8 +68,8 @@ pipeline{
           steps {
               script {
                   docker.withRegistry('', registryCredential) {
-                      dockerImage.push("BUILD_ID")
-                      dockerImage.push("latest")
+                      dockerimage.push("BUILD_ID")
+                      dockerimage.push("latest")
                       }
                   }
               }
