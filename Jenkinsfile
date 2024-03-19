@@ -39,13 +39,13 @@ pipeline{
       //       }
       //   }
       stage('sonar analysis') {
-        // environment {
-        //   scannerHome = tool 'sonarQubeScanner'
-        //   }
+        environment {
+          scannerHome = tool 'sonarQubeScanner'
+          }
           steps {
             script {
-              withSonarQubeEnv('sonarQubeScanner') {
-                bat "\"sonar-scanner\" -Dsonar.projectKey=devops -Dsonar.projectName=reactEssential"
+              withSonarQubeEnv('sonarScanner') {
+                bat """\"${scannerHome}\\bin\\sonar-scanner\" -Dsonar.projectKey=devops -Dsonar.projectName=reactEssential"""
                 }
               }
             }
