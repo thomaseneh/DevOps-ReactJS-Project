@@ -67,7 +67,7 @@ pipeline{
       stage('upload'){
         steps{
           script{
-            docker.withEnvRegistry('', registryCredential){
+            docker.withRegistry('', registryCredential){
               image.push("$BUILD_ID")
               image.push("latest")
               }
