@@ -33,7 +33,9 @@ pipeline{
       // }
       stage('style analysis'){
         steps{
-            bat 'npm run checkstyle'
+           script{
+              bat 'npm run checkstyle'
+              }
             }
         }
       stage('sonar analysis'){
