@@ -4,8 +4,6 @@ phases:
   install:
     runtime-versions:
       nodejs: 19.9.0
-    commands:
-      nodejs: Node.js
 
   pre_build:
     commands:
