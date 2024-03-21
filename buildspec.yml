@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 19.9.0
+      nodejs: 20
 
   pre_build:
     commands:
@@ -29,7 +29,9 @@ phases:
     - echo pushing the docker image to ECR started on 'date'
     - echo pushing docker image to repository
     - docker push 217874473810.dkr.ecr.us-east-1.amazonaws.com/toprefunder:latest
+    - echo setting container name...
+    - DOCKER_CONTAINER_NAME=docker-container
 
-  artifacts:
-    files:
-    - 'dist/**'
+artifacts:
+  files:
+  - 'dist/**'
