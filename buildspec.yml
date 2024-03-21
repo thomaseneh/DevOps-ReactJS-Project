@@ -1,37 +1,35 @@
 version: 0.2
 
 phases:
-  # install:
-  #   runtime-versions:
-  #     nodejs: 19.9.0
-  #   commands:
-  #     nodejs: Node.js
+  install:
+    runtime-versions:
+      nodejs: 19.9.0
 
   pre_build:
     commands:
-    - echo logging into Amazon ECR started on 'date'
-    - aws --version
-    - echo logging into Amazon ECR...
-    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 217874473810.dkr.ecr.us-east-1.amazonaws.com
-    - echo setting up repository URI...
-    - REPOSITORY_URI=217874473810.dkr.ecr.us-east-1.amazonaws.com/toprefunder
+      - echo logging into Amazon ECR started on 'date'
+      - aws --version
+      - echo logging into Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 217874473810.dkr.ecr.us-east-1.amazonaws.com
+      - echo setting up repository URI...
+      - REPOSITORY_URI=217874473810.dkr.ecr.us-east-1.amazonaws.com/toprefunder
   build:
     commands:
-    - echo building and tagging image on 'date'
-    - echo running npm install...
-    - npm install
-    - npm run build
-    - echo building docker image...
-    - docker build -t toprefunder .
-    - echo tagging the docker image
-    - docker tag toprefunder:latest 217874473810.dkr.ecr.us-east-1.amazonaws.com/toprefunder:latest
+      - echo building and tagging image on 'date'
+      - echo running npm install...
+      - npm install
+      - npm run build
+      - echo building docker image...
+      - docker build -t toprefunder .
+      - echo tagging the docker image
+      - docker tag toprefunder:latest 217874473810.dkr.ecr.us-east-1.amazonaws.com/toprefunder:latest
 
   post_build:
     commands:
-    - echo pushing the docker image to ECR started on 'date'
-    - echo pushing docker image to repository
-    - docker push 217874473810.dkr.ecr.us-east-1.amazonaws.com/toprefunder:latest
+      - echo pushing the docker image to ECR started on 'date'
+      - echo pushing docker image to repository
+      - docker push 217874473810.dkr.ecr.us-east-1.amazonaws.com/toprefunder:latest
 
   artifacts:
     files:
-    - 'dist/**'
+      - 'dist/**'
