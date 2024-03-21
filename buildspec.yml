@@ -1,11 +1,11 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      nodejs: 19.9.0
-    commands:
-      nodejs: Node.js
+  # install:
+  #   runtime-versions:
+  #     nodejs: 19.9.0
+  #   commands:
+  #     nodejs: Node.js
 
   pre_build:
     commands:
