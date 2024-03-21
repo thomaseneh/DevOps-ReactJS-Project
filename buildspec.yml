@@ -30,6 +30,6 @@ phases:
       - echo pushing docker image to repository
       - docker push 217874473810.dkr.ecr.us-east-1.amazonaws.com/toprefunder:latest
 
-  artifacts:
-    files:
-      - 'dist/**'
+artifacts:
+  files:
+    - 'dist/**'
