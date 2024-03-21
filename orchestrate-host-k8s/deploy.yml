@@ -5,7 +5,7 @@ metadata:
   labels:
     app: toprefunder
 spec:
-  replica: 3
+  replicas: 3
   selector:
     matchLabels:
       app: toprefunder
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: react-project
-        image: imagename
+        image: imagenameclear
         ports:
         - name: image-port
           containerPort: 5173
