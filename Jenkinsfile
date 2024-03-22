@@ -12,7 +12,7 @@ pipeline{
     stages{
       stage('install dependencies'){
         steps{
-            sh 'source ~/.nvm/nvm.sh && npm install'
+            sh 'npm install'
             sh 'npm run build'
             }
         }
