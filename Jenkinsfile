@@ -12,15 +12,8 @@ pipeline{
     stages{
       stage('install dependencies'){
         steps{
-            // Use the desired Node.js version directly from NVM
-            sh '/var/lib/jenkins/.nvm/versions/node/v21.7.1/bin/node -v'
-            sh '/var/lib/jenkins/.nvm/versions/node/v21.7.1/bin/npm -v'
-
-                // Run your npm commands here
-            sh '/var/lib/jenkins/.nvm/versions/node/v21.7.1/bin/npm install'
-            sh '/var/lib/jenkins/.nvm/versions/node/v21.7.1/bin/npm run build'
-            // sh 'npm install'
-            // sh 'npm run build'
+            sh 'npm install'
+            sh 'npm run build'
             }
         }
         stage('fetch'){
