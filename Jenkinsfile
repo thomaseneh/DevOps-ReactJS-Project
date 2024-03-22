@@ -12,8 +12,8 @@ pipeline{
     stages{
       stage('install dependencies'){
         steps{
-            bat 'npm install'
-            bat 'npm run build'
+            sh 'npm install'
+            sh 'npm run build'
             }
         }
         stage('fetch'){
@@ -23,18 +23,18 @@ pipeline{
         }
       // stage('unit test'){
       //   steps{
-      //       bat 'npm run test'
+      //       sh 'npm run test'
       //   }
       // }
       // stage('integration test'){
       //   steps{
-      //       bat 'npm run integration test Dskip unitTest'
+      //       sh 'npm run integration test Dskip unitTest'
       //   }
       // }
       // stage('style analysis'){
       //   steps{
       //      script{
-      //         bat 'npm run checkstyle'
+      //         sh 'npm run checkstyle'
       //         }
       //       }
       //   }
@@ -45,7 +45,7 @@ pipeline{
       //     steps {
       //       script {
       //         withSonarQubeEnv('sonarScanner') {
-      //           bat """\"${scannerHome}\\bin\\sonar-scanner\" -Dsonar.projectKey=devops -Dsonar.projectName=reactEssential"""
+      //           sh """\"${scannerHome}\\bin\\sonar-scanner\" -Dsonar.projectKey=devops -Dsonar.projectName=reactEssential"""
       //           }
       //         }
       //       }
@@ -78,8 +78,8 @@ pipeline{
       stage('remove unused images'){
         steps{
             script{
-              bat "docker rmi ${registry}:$BUILD_ID"
-            }
+              sh "docker rmi ${registry}:$BUILD_ID"
+              }
             }
         }
         stage('message'){
