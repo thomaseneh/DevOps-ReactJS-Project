@@ -12,6 +12,12 @@ pipeline{
     stages{
       stage('install dependencies'){
         steps{
+            // Source NVM and use the desired Node.js version
+            sh 'source ~/.nvm/nvm.sh && nvm use v21.7.1'
+
+                // Now Node.js v21.7.1 should be used
+            sh 'node -v'
+            sh 'npm -v'
             sh 'npm install'
             sh 'npm run build'
             }
