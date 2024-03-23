@@ -68,9 +68,9 @@ pipeline{
           steps {
               script {
                   docker.withRegistry('', registryCredential) {
-                      dockerimage.push("$BUILD_NUMBER")
-                      dockerimage.push("latest")
-                      }
+                    dockerimage.push("$BUILD_NUMBER")
+                    dockerimage.push("latest")
+                    }
                   }
               }
           }
@@ -81,6 +81,12 @@ pipeline{
               sh "docker rmi ${registry}:$BUILD_ID"
               }
             }
+        }
+        stage('deploy to k8s'){
+          agent{label 'kops'}
+          steps{
+            sh 'help upgrade --install --force toprefunder-k8s helm/helmchat --set appImage=${registry}:${BUILD_NUMBER}'
+          }
         }
         stage('message'){
             steps{
