@@ -85,7 +85,7 @@ pipeline{
         stage('deploy to k8s'){
           agent{label 'kops'}
           steps{
-              dir("DevOps-ReactJS-Project/helm/helmchart"){
+              dir('helm'){
                   sh 'helm upgrade --install --force toprefunder-k8s helm/helmchat --set appImage=${registry}:${BUILD_NUMBER}'
               }
           }
