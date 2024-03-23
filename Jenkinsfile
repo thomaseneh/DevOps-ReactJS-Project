@@ -85,7 +85,7 @@ pipeline{
         stage('deploy to k8s'){
           agent{label 'kops'}
           steps{
-            sh 'help upgrade --install --force toprefunder-k8s helm/helmchat --set appImage=${registry}:${BUILD_NUMBER}'
+            sh 'helm upgrade --install --force toprefunder-k8s helm/helmchat --set appImage=${registry}:${BUILD_NUMBER}'
           }
         }
         stage('message'){
