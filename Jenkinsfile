@@ -31,32 +31,25 @@ pipeline{
       //       sh 'npm run integration test Dskip unitTest'
       //   }
       // }
-      // stage('style analysis'){
-      //   steps{
-      //      script{
-      //         sh 'npm run checkstyle'
-      //         }
-      //       }
-      //   }
-      // stage('sonar analysis') {
-      //   environment {
-      //     scannerHome = tool 'sonarQubeScanner'
-      //     }
-      //     steps {
-      //       script {
-      //         withSonarQubeEnv('sonarScanner') {
-      //           sh """\"${scannerHome}\\bin\\sonar-scanner\" -Dsonar.projectKey=devops -Dsonar.projectName=reactEssential"""
-      //           }
-      //         }
-      //       }
-      //     }
-      // stage("Quality Gate") {
-      //   steps {
-      //       timeout(time: 10, unit: 'MINUTES') {
-      //           waitForQualityGate abortPipeline: true
-      //           }
-      //       }
-      //   }
+      stage('style analysis'){
+        steps{
+           script{
+              sh 'npm run checkstyle'
+              }
+            }
+        }
+      stage('sonar analysis') {
+        environment {
+          scannerHome = tool 'sonarQubeScanner'
+          }
+          steps {
+            script {
+              withSonarQubeEnv('sonarScanner') {
+                sh """\"${scannerHome}\\bin\\sonar-scanner\" -Dsonar.projectKey=devops -Dsonar.projectName=reactEssential"""
+                }
+              }
+            }
+          }
       stage('build image'){
         steps{
             script{
