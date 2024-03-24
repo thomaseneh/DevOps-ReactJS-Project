@@ -85,9 +85,9 @@ pipeline{
         stage('deploy to k8s'){
           agent{label 'kops'}
           steps{
-              sh 'helm upgrade --install --force toprefunder helm/helmchart --set appImage=${registry}:${BUILD_NUMBER}'
-              }
+            sh 'helm upgrade --install --force toprefunder helm/helmchart --set appImage=${registry}:${BUILD_NUMBER}'
             }
+          }
         stage('message'){
             steps{
                 echo 'Code need at leat unit test or integration test. Fix and get back to me'
