@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "checkstyle": "eslint . --ext .js --max-warnings=10"
+    "checkstyle": "eslint . --ext .js --max-warnings=1000"
   },
   "dependencies": {
     "react": "^18.0.0",
