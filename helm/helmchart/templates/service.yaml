@@ -1,15 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "helmchart.fullname" . }}
-  labels:
-    {{- include "helmchart.labels" . | nindent 4 }}
+  name: toprefunder
 spec:
-  type: {{ .Values.service.type }}
-  ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
   selector:
-    {{- include "helmchart.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/name: toprefunder
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5173
+  type: LoadBalancer
