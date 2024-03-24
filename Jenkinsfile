@@ -86,7 +86,7 @@ pipeline{
           agent{label 'kops'}
           steps{
               dir('helm'){
-                  sh 'helm upgrade --install --force toprefunder-k8s helm/helmchat --set appImage=${registry}:${BUILD_NUMBER}'
+                  sh 'helm upgrade --install --force toprefunder helm/helmchart --set appImage=${registry}:${BUILD_NUMBER}'
               }
           }
         }
